@@ -7,7 +7,7 @@ const Index = (props) => (
     <ul>
       {props.shows.map(({show}) => (
         <li key={show.id}>
-          <Link as={`/batman/${show.id}`} href={`/batman/post?id=${show.id}`}>
+          <Link href={`/batman/${show.id}`}>
             <a>{show.name}</a>
           </Link>
         </li>
@@ -35,14 +35,28 @@ const Index = (props) => (
   </Layout>
 )
 
-Index.getInitialProps = async () => {
+// legacy approach
+// Index.getInitialProps = async () => {
+//   const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
+//   const data = await res.json()
+
+//   console.log(`Show data fetched. Count: ${data.length}`)
+
+//   return {
+//     shows: data
+//   }
+// }
+
+export async function getStaticProps() {
   const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
   const data = await res.json()
 
   console.log(`Show data fetched. Count: ${data.length}`)
 
   return {
-    shows: data
+    props: {
+      shows: data,
+    }
   }
 }
 
