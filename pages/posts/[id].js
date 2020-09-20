@@ -43,7 +43,10 @@ export async function getStaticProps({ params }) {
       props: {
         postData
       },
-      revalidate: 1, // An optional amount in seconds after which a page re-generation can occur.
+      // Next.js will attempt to re-generate the page:
+      // - When a request comes in
+      // - At most once every second
+      revalidate: 1, // Optional
     }
   } catch (error) {
     return {
