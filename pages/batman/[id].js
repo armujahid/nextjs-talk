@@ -18,7 +18,7 @@ const Post =  ({show, error}) => {
     <Layout>
        <h1>{show.name}</h1>
        <p>{show.summary.replace(/<[/]?p>/g, '')}</p>
-       <img src={show.image?.medium}/>
+       <img src={show.image?.medium.replace(/^http:\/\//, 'https://')}/>
        <ul>
          <li>
             Premiered {show.premiered}
